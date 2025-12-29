@@ -1,0 +1,29 @@
+{
+    "name": "chando-pancake-crm-contact.json",
+    "config": {
+        "connector.class": "io.confluent.connect.http.HttpSourceConnector",
+        "tasks.max": "2",
+        
+        "topic.name.pattern": "chando.crm.contact",
+        
+        "url": "https://pos.pages.fm/api/v1/shops/${shop_id}/crm/Contact/records?api_key=${api_key}",
+        "method": "GET",
+        
+        "headers": "Accept: application/json",
+        
+        "poll.interval.ms": "1000",
+        
+        "http.offset.mode": "SIMPLE_INCREMENTING",
+        "http.initial.offset": "0",
+        
+        "confluent.topic.bootstrap.servers": "kafka-1:9094,kafka-2:9094,kafka-3:9094",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "false",
+        
+        "errors.tolerance": "all",
+        "errors.log.enable": "true",
+        "errors.log.include.messages": "true"
+    }
+}
+
