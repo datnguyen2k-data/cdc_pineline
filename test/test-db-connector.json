@@ -1,0 +1,22 @@
+{
+  "name": "test-db-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "postgres_db",
+    "database.port": "5432",
+    "database.user": "datnguyen_dwh",
+    "database.password": "datnguyen@13579",
+    "database.dbname": "dn_dwh",
+
+    "plugin.name": "pgoutput",
+
+    "table.include.list": "public.sale_order",
+
+    "topic.prefix": "test_order",
+
+    "confluent.topic.bootstrap.servers": "kafka-kraft-1:9092,kafka-kraft-2:9092,kafka-kraft-3:9092",
+    "database.history.kafka.topic": "schema-changes.test_order"
+  }
+}
