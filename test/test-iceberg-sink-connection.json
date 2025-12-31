@@ -1,0 +1,31 @@
+{
+    "name": "test-iceberg-sink-connection",
+    "config": {
+      "connector.class": "org.apache.iceberg.connect.IcebergSinkConnector",
+      "tasks.max": "1",
+      "topics": "test_order.public.sale_order",
+  
+      "iceberg.catalog.type": "rest",
+      "iceberg.catalog.uri": "http://iceberg-rest:8181",
+      "iceberg.catalog.warehouse": "s3://warehouse",
+  
+      "iceberg.catalog.io-impl": "org.apache.iceberg.aws.s3.S3FileIO",
+  
+      "iceberg.tables.dynamic-enabled": "true",
+      "iceberg.tables.route-field": "table_name",
+      "iceberg.tables.auto-create-enabled": "true",
+      "iceberg.tables.evolve-schema-enabled": "true",
+      "iceberg.tables.upsert-mode-enabled": "false",
+  
+      "iceberg.control.topic": "iceberg-connector-control-v1",
+      "iceberg.control.commit.interval-ms": "6000",
+  
+      "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable": "false",
+      "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable": "false",
+  
+      "errors.log.enable": "true"
+    }
+  }
+  
