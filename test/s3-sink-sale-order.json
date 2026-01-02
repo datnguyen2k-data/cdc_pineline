@@ -1,0 +1,38 @@
+{
+    "name": "s3-sink-sale-order",
+    "config": {
+      "connector.class": "io.confluent.connect.s3.S3SinkConnector",
+  
+      "tasks.max": "1",
+      "topics": "test_order.public.sale_order",
+  
+      "s3.bucket.name": "warehouse",
+      "s3.region": "us-east-1",
+      "store.url": "http://minio:9000",
+      "s3.path.style.access": "true",
+      "aws.access.key.id": "datnguyen",
+      "aws.secret.access.key": "datnguyen@13579",
+      "storage.class": "io.confluent.connect.s3.storage.S3Storage",
+      "format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat",
+  
+      "flush.size": "1",
+      "rotate.interval.ms": "60000",
+  
+      "schema.compatibility": "NONE",
+  
+      "partitioner.class": "io.confluent.connect.storage.partitioner.TimeBasedPartitioner",
+      "path.format": "yyyy/MM/dd",
+      "partition.duration.ms": "86400000",
+      "timezone": "UTC",
+      "locale": "en_US",
+  
+      "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+      "value.converter": "io.confluent.connect.avro.AvroConverter",
+      "value.converter.schema.registry.url": "http://schema-registry:8081",
+  
+      "transforms": "unwrap",
+      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrap.drop.tombstones": "true",
+      "transforms.unwrap.delete.handling.mode": "rewrite"
+    }
+}

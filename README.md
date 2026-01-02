@@ -16,3 +16,11 @@ curl -X POST http://localhost:8083/connectors \
   -d @test-iceberg-sink-connection.json
 
 curl http://localhost:8083/connectors/test-iceberg-sink-connection/status
+
+curl -X POST http://localhost:8083/connectors \
+  -H "Content-Type: application/json" \
+  -d @s3-sink-sale-order.json
+
+curl -X DELETE http://localhost:8083/connectors/s3-sink-sale-order
+
+curl http://localhost:8083/connectors/s3-sink-sale-order/status
