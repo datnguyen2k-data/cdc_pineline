@@ -1,0 +1,117 @@
+{
+  "type": "record",
+  "name": "PancakeOrderFull",
+  "namespace": "vn.chando.sale",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "system_id", "type": "long"},
+    {"name": "status", "type": "int"},
+    {"name": "status_name", "type": ["null", "string"], "default": null},
+    {"name": "order_currency", "type": ["null", "string"], "default": null},
+    {"name": "order_sources_name", "type": ["null", "string"], "default": null},
+    {"name": "total_price", "type": "long"},
+    {"name": "total_price_after_sub_discount", "type": "long"},
+    {"name": "money_to_collect", "type": "long"},
+    {"name": "cod", "type": "long"},
+    {"name": "fee_marketplace", "type": "long"},
+    {"name": "inserted_at", "type": "string"},
+    {"name": "updated_at", "type": "string"},
+    
+    /* 1. Thông tin Kho hàng */
+    {
+      "name": "warehouse_info",
+      "type": {
+        "type": "record",
+        "name": "WarehouseInfo",
+        "fields": [
+          {"name": "custom_id", "type": ["null", "string"], "default": null},
+          {"name": "name", "type": ["null", "string"], "default": null},
+          {"name": "full_address", "type": ["null", "string"], "default": null}
+        ]
+      }
+    },
+
+    /* 2. Địa chỉ giao hàng */
+    {
+      "name": "shipping_address",
+      "type": {
+        "type": "record",
+        "name": "ShippingAddress",
+        "fields": [
+          {"name": "full_name", "type": ["null", "string"], "default": null},
+          {"name": "phone_number", "type": ["null", "string"], "default": null},
+          {"name": "full_address", "type": ["null", "string"], "default": null},
+          {"name": "province_name", "type": ["null", "string"], "default": null},
+          {"name": "district_name", "type": ["null", "string"], "default": null},
+          {"name": "commune_name", "type": ["null", "string"], "default": null}
+        ]
+      }
+    },
+
+    /* 3. Thông tin Khách hàng */
+    {
+      "name": "customer",
+      "type": {
+        "type": "record",
+        "name": "CustomerRecord",
+        "fields": [
+          {"name": "customer_id", "type": "string"},
+          {"name": "name", "type": ["null", "string"], "default": null},
+          {"name": "username", "type": ["null", "string"], "default": null},
+          {"name": "phone_numbers", "type": {"type": "array", "items": "string"}},
+          {"name": "order_count", "type": "int"}
+        ]
+      }
+    },
+
+    /* 4. Chi tiết sản phẩm (Array) */
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "OrderItem",
+          "fields": [
+            {"name": "id", "type": "long"},
+            {"name": "product_id", "type": ["null", "string"], "default": null},
+            {"name": "variation_id", "type": ["null", "string"], "default": null},
+            {"name": "quantity", "type": "int"},
+            {"name": "total_discount", "type": "long"},
+            {
+              "name": "variation_info",
+              "type": {
+                "type": "record",
+                "name": "VariationInfo",
+                "fields": [
+                  {"name": "name", "type": "string"},
+                  {"name": "display_id", "type": ["null", "string"], "default": null},
+                  {"name": "barcode", "type": ["null", "string"], "default": null},
+                  {"name": "retail_price", "type": "long"},
+                  {"name": "weight", "type": ["null", "long"], "default": null}
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    /* 5. Phí nền tảng (Advanced Platform Fee) */
+    {
+      "name": "advanced_platform_fee",
+      "type": {
+        "type": "record",
+        "name": "PlatformFee",
+        "fields": [
+          {"name": "payment_fee", "type": ["null", "long"], "default": null},
+          {"name": "seller_transaction_fee", "type": ["null", "long"], "default": null},
+          {"name": "service_fee", "type": ["null", "long"], "default": null}
+        ]
+      }
+    },
+
+    {"name": "tracking_link", "type": ["null", "string"], "default": null},
+    {"name": "order_link", "type": ["null", "string"], "default": null}
+  ]
+}
